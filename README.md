@@ -33,14 +33,15 @@ studentmanagement/
 1. **Clone the repository**
 ```bash
 git clone https://github.com/Md-Ahsan-IT/studentmanagement.git
-cd studentmanagementInstall dependencies
+cd studentmanagement
 
-bash
+2.Install dependencies
 pip install -r requirements.txt
-Run the application
 
-bash
-streamlit run student_app.pyOpen your browser and go to http://localhost:8501
+3.Run the application
+streamlit run student_app.py
+
+4.Open your browser and go to http://localhost:8501
 
 💻 Usage
 Add Student: Fill the form to add new students with automatic ID generation
