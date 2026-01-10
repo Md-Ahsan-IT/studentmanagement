@@ -126,7 +126,13 @@ def main():
     st.title("🎓 Student Management System")
     st.markdown("---")
     
-    manager = StudentManager()
+    # ------------------------
+    # Session State Manager
+    # ------------------------
+    data_file = os.path.join(os.path.dirname(__file__), "students.json")
+    if "manager" not in st.session_state:
+        st.session_state.manager = StudentManager(data_file=data_file)
+    manager = st.session_state.manager
     
     # Navigation
     st.sidebar.title("Navigation")
@@ -144,6 +150,9 @@ def main():
         pattern = r'^[1-9][0-9]?[A-Z]$'
         return re.match(pattern, grade.upper()) is not None
     
+    # ------------------------
+    # View All Students
+    # ------------------------
     if app_mode == "View All Students":
         st.header("👥 All Students")
         students = manager.get_all_students()
@@ -177,6 +186,9 @@ def main():
         else:
             st.info("No students found in the system. Add some students to get started!")
     
+    # ------------------------
+    # Add Student
+    # ------------------------
     elif app_mode == "Add Student":
         st.header("➕ Add New Student")
         with st.form("add_student_form"):
@@ -213,6 +225,9 @@ def main():
                     else:
                         st.error("❌ Failed to add student.")
     
+    # ------------------------
+    # Update Student
+    # ------------------------
     elif app_mode == "Update Student":
         st.header("✏️ Update Student Information")
         students = manager.get_all_students()
@@ -263,6 +278,9 @@ def main():
                             else:
                                 st.error("❌ Failed to update student.")
     
+    # ------------------------
+    # Delete Student
+    # ------------------------
     elif app_mode == "Delete Student":
         st.header("🗑️ Delete Student")
         students = manager.get_all_students()
@@ -281,6 +299,9 @@ def main():
                     else:
                         st.error("❌ Failed to delete student.")
     
+    # ------------------------
+    # Search & Filter
+    # ------------------------
     elif app_mode == "Search & Filter":
         st.header("🔍 Search & Filter Students")
         col1, col2 = st.columns([2, 1])
@@ -324,3 +345,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
